@@ -1,0 +1,139 @@
+#####################################
+#TENTATIVO 01
+
+n_mu_train    = 5
+n_theta_train = 10
+
+rete:       dense(20) -> dense(20) -> dense(20)
+activation: tanh
+
+
+loss 1:
+normalization: si
+weights: fit 1 | BC 1
+
+training 1:
+adam(lr 1e-2): n_epoch= 300
+BFGS:          n_epoch= 5700
+
+Losses: loss = 8.871e-06 | fit: 2.595e-03^2  BC: 1.461e-03^2   
+			|| fit: 2.460e-03^2  BC: 1.674e-03^2  
+
+
+loss 2:
+normalization: si
+weights: fit 1 | PDE 1 | BC 1
+
+training 2:
+adam(lr 1e-2): n_epoch= 100
+BFGS:          n_epoch= 300
+
+Losses: loss = 3.635e-04 | fit: 1.084e-02^2  PDE: 1.371e-02^2  BC: 7.608e-03^2   
+			|| fit: 9.033e-03^2  PDE: 1.269e-02^2  BC: 6.746e-03^2  
+
+commenti: 
+È l'ultimo esperimento della volta scorsa. Lo ripeto perché abbiamo corretto PDE(). Quando si attacca la loss PDE, tutto ripeggiora, poi torna a scendere, come se il primo training non fosse mai avvenuto. Spero che questo non sia un problema relativo al codice.
+
+#####################################
+#TENTATIVO 02
+
+n_mu_train    = 5
+n_theta_train = 10
+
+rete:       dense(20) -> dense(20) -> dense(20)
+activation: tanh
+
+
+loss 1:
+normalization: si
+weights: fit 1 | BC 1
+
+training 1:
+adam(lr 1e-2): n_epoch= 500
+BFGS:          n_epoch= 9500
+
+Losses: loss = 5.234e-06 | fit: 1.989e-03^2  BC: 1.131e-03^2   || fit: 2.043e-03^2  BC: 1.774e-03^2  
+
+
+loss 2:
+normalization: si
+weights: fit 1 | PDE 0.1 | BC 1
+
+training 2:
+adam(lr 1e-2): n_epoch= 0
+BFGS:          n_epoch= 400
+
+Losses: loss = 1.536e-04 | fit: 7.349e-03^2  PDE: 2.837e-02^2  BC: 4.368e-03^2   || fit: 6.388e-03^2  PDE: 2.708e-02^2  BC: 4.043e-03^2  
+
+commenti: 
+Aumento le epochs di BFGS al primo training, e tolgo Adam al secondo training. Come prima. Inoltre overfitta il test BC alla fine del primo training
+
+#####################################
+#TENTATIVO 03
+
+n_mu_train    = 5
+n_theta_train = 10
+
+rete:       dense(20) -> dense(20) -> dense(20)
+activation: tanh
+
+
+loss 1:
+normalization: si
+weights: fit 1 | BC 1
+
+training 1:
+adam(lr 1e-2): n_epoch= 1000
+BFGS:          n_epoch= 9500
+
+Losses: loss = 3.714e-06 | fit: 1.689e-03^2  BC: 9.278e-04^2   
+			|| fit: 1.969e-03^2  BC: 1.367e-03^2  
+
+loss 2:
+normalization: si
+weights: fit 1 | PDE 0.1 | BC 1
+
+training 2:
+adam(lr 1e-3): n_epoch= 100
+BFGS:          n_epoch= 400
+
+Losses: loss = 1.234e-04 | fit: 7.075e-03^2  PDE: 2.363e-02^2  BC: 4.189e-03^2   
+			|| fit: 6.074e-03^2  PDE: 2.235e-02^2  BC: 3.682e-03^2  
+
+commenti: 
+Aumento le epochs di Adam al primo training, e abbasso il learning rate al secondo training. Risultati comparabili al 2, solo molto più oscillatori
+
+
+#####################################
+#TENTATIVO 04
+
+n_mu_train    = 5
+n_theta_train = 10
+
+rete:       dense(20) -> dense(20) -> dense(20)
+activation: tanh
+
+
+loss 1:
+normalization: si
+weights: fit 1 | BC 1
+
+training 1:
+adam(lr 1e-2):     n_epoch= 1000
+L-BFGS-B:          n_epoch= 9500
+
+Losses: loss = 3.714e-06 | fit: 1.689e-03^2  BC: 9.278e-04^2   
+			|| fit: 1.969e-03^2  BC: 1.367e-03^2  
+
+loss 2:
+normalization: si
+weights: fit 1 | PDE 0.1 | BC 1
+
+training 2:
+adam(lr 1e-3):     n_epoch= 100
+L-BFGS-B:          n_epoch= 900
+
+Losses:  
+
+commenti: 
+Ho cambiato il metodo di training in L-BFGS-B, e ho aumentato le epochs del L-BFGS-B nel secondo training. È come se il cambio in L-BFGS-B non avesse avuto alcun effetto

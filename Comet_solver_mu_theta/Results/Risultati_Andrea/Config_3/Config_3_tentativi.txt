@@ -1,0 +1,143 @@
+#####################################
+#TENTATIVO 01
+
+n_mu_train    = 6
+n_theta_train = 10
+
+train_split = 0.85
+
+rete:       dense(20) -> dense(20) -> dense(20)
+activation: tanh
+
+
+loss 1:
+normalization: si
+weights: fit 1 | PDE 1 | BC 1
+
+training 1:
+adam(lr 1e-3): n_epoch= 250
+BFGS:          n_epoch= 10000
+
+Losses: 
+
+
+
+
+commenti: 
+Rispetto alla precedente configurazione, abbiamo scelto dei mu più vicini a 0. Inoltre abbiamo implementato la test loss su una griglia differente da quella di train. Le performance, soprattutto per la PDE loss nei punti diversi da quelli di train, peggiorano notevolmente. È molto frequente che la loss non migliori nei punti in cui non viene trainata, ora che ci penso.
+
+
+
+#####################################
+#TENTATIVO 02
+
+n_mu_train    = 6
+n_theta_train = 10
+
+train_split = 0.85
+
+rete:       dense(20) -> dense(20) -> dense(20)
+activation: tanh
+
+
+loss 1:
+normalization: si
+weights: fit 1 | PDE 100 | BC 1
+
+training 1:
+adam(lr 1e-3): n_epoch= 250
+BFGS:          n_epoch= 10000
+
+Losses: loss = 9.945e-03 | fit: 6.725e-02^2  PDE: 7.267e-03^2  BC: 1.190e-02^2   
+			|| fit: 6.662e-01^2  PDE: 2.543e+00^2  BC: 6.526e-01^2  
+
+
+commenti: 
+Risultati catastrofici. Inoltre dal plot diretto del risultato (02 im1) non riesco capire se la soluzione numerica sia corretta oppure no. Proverò ad aumentare di brutto il train split
+
+
+#####################################
+#TENTATIVO 03
+
+n_mu_train    = 6
+n_theta_train = 10
+
+train_split = 0.95
+
+rete:       dense(20) -> dense(20) -> dense(20)
+activation: tanh
+
+
+loss 1:
+normalization: si
+weights: fit 1 | PDE 100 | BC 1
+
+training 1:
+adam(lr 1e-3): n_epoch= 250
+BFGS:          n_epoch= 10000
+
+Losses: loss = 4.662e-03 | fit: 6.621e-02^2  PDE: 1.183e-03^2  BC: 1.175e-02^2   
+			|| fit: 6.670e-02^2  PDE: 2.043e+00^2  BC: 1.175e-02^2  
+
+
+
+commenti: 
+Fit e BC saturano ad un certo punto. PDE train continua a diminuire, ma PDE loss è un disastro. 
+
+
+
+#####################################
+#TENTATIVO 04
+
+n_mu_train    = 6
+n_theta_train = 10
+
+train_split = 0.97
+
+rete:       dense(20) -> dense(20) -> dense(20)
+activation: tanh
+
+
+loss 1:
+normalization: si
+weights: fit 1 | PDE 1000 | BC 1
+
+training 1:
+adam(lr 1e-3): n_epoch= 250
+BFGS:          n_epoch= 10000
+
+Losses: loss = 1.027e-02 | fit: 6.648e-02^2  PDE: 2.390e-03^2  BC: 1.181e-02^2   
+			|| fit: 5.485e-02^2  PDE: 2.406e-02^2  BC: 1.181e-02^2  
+
+
+commenti: 
+Non sembra avere avuto nessun grande giovamento dall'aumento di train_split e di weight per la PDE loss. Adesso provo ad aumentare il numero di epochs per Adam.
+
+
+
+#####################################
+#TENTATIVO 05
+
+n_mu_train    = 6
+n_theta_train = 10
+
+train_split = 0.97
+
+rete:       dense(20) -> dense(20) -> dense(20)
+activation: tanh
+
+
+loss 1:
+normalization: si
+weights: fit 1 | PDE 100 | BC 1
+
+training 1:
+adam(lr 1e-3): n_epoch= 1000
+BFGS:          n_epoch= 9000
+
+Losses: loss = 4.725e-03 | fit: 6.659e-02^2  PDE: 1.226e-03^2  BC: 1.182e-02^2   
+			|| fit: 5.484e-02^2  PDE: 6.594e-03^2  BC: 1.183e-02^2  
+
+
+commenti: 
+Sembra che abbiamo raggiunto una buona configurazione. Può essere una buona idea ora provare ad aumentare un pelo i neuroni nella rete, per vedere se le performances migliorano.

@@ -1,0 +1,109 @@
+#####################################
+#TENTATIVO 01
+
+n_mu_train    = 5
+n_theta_train = 10
+
+rete:       dense(20) -> dense(20) -> dense(20)
+activation: tanh
+
+
+loss 1:
+normalization: si
+weigths: fit 1 | BC 1
+
+training 1:
+adam(lr 1e-2): n_epoch= 300
+BFGS:          n_epoch= 2700
+
+Losses: loss = 3.043e-05 | fit: 4.823e-03^2  BC: 2.677e-03^2   
+			|| fit: 4.322e-03^2  BC: 2.741e-03^2 
+
+
+loss 2 (Errata!):
+normalization: si
+weigths: fit 1 | PDE 15 | BC 1
+
+training 2:
+adam(lr 1e-2): n_epoch= 100
+BFGS:          n_epoch= 100
+
+Losses: loss = 6.113e-03 | fit: 5.323e-02^2  PDE: 1.419e-02^2  BC: 1.609e-02^2   
+			|| fit: 4.313e-02^2  PDE: 1.364e-02^2  BC: 1.424e-02^2
+
+
+commenti: 
+Questo è l'esperimento di partenza. Già ottimi risultati con la fit loss. Con la PDE loss c'è un enorme peggioramento, ma perché probabilmente cambia di botto la loss totale. Adesso provo più epochs per entrambi e vediamo che succede.
+
+#####################################
+#TENTATIVO 02
+
+n_mu_train    = 5
+n_theta_train = 10
+
+rete:       dense(20) -> dense(20) -> dense(20)
+activation: tanh
+
+
+loss 1:
+normalization: si
+weigths: fit 1 | BC 1
+
+training 1:
+adam(lr 1e-2): n_epoch= 300
+BFGS:          n_epoch= 3700
+
+Losses: 1.864e-05 | fit: 3.726e-03^2  BC: 2.181e-03^2   
+		 || fit: 3.472e-03^2  BC: 2.284e-03^2 
+
+
+loss 2 (Errata!):
+normalization: si
+weigths: fit 1 | PDE 15 | BC 1
+
+training 2:
+adam(lr 1e-2): n_epoch= 100
+BFGS:          n_epoch= 200
+
+Losses: loss = 3.449e-03 | fit: 4.622e-02^2  PDE: 8.826e-03^2  BC: 1.201e-02^2   
+			|| fit: 3.629e-02^2  PDE: 8.195e-03^2  BC: 1.050e-02^2 
+
+
+commenti: 
+Ancora sulla stessa solfa di prima. Un ultimo incremento di epochs, perché il non usare la loss sulla PDE sembra una buona soluzione
+
+#####################################
+#TENTATIVO 03
+
+n_mu_train    = 5
+n_theta_train = 10
+
+rete:       dense(20) -> dense(20) -> dense(20)
+activation: tanh
+
+
+loss 1:
+normalization: si
+weigths: fit 1 | BC 1
+
+training 1:
+adam(lr 1e-2): n_epoch= 300
+BFGS:          n_epoch= 5700
+
+Losses: loss = 8.871e-06 | fit: 2.595e-03^2  BC: 1.461e-03^2   
+			|| fit: 2.460e-03^2  BC: 1.674e-03^2  
+
+
+loss 2 (Errata!):
+normalization: si
+weigths: fit 1 | PDE 15 | BC 1
+
+training 2:
+adam(lr 1e-2): n_epoch= 100
+BFGS:          n_epoch= 300
+
+Losses: loss = 2.783e-03 | fit: 3.910e-02^2  PDE: 8.633e-03^2  BC: 1.167e-02^2   
+			|| fit: 3.097e-02^2  PDE: 7.836e-03^2  BC: 9.558e-03^2  
+
+commenti: 
+Ottime prestazioni anche senza PDE. Di fatto raggiungo gli stessi risultati che con PDE, ma su un'equazione più grande.

@@ -1,0 +1,82 @@
+#####################################
+#TENTATIVO 01
+
+n_mu_train    = 6
+n_theta_train = 10
+
+train_split = 0.97
+
+rete:       dense(22) -> dense(22) -> dense(22)
+activation: tanh
+
+
+loss 1:
+normalization: si
+weights: fit 1 | PDE 100 | BC 1
+
+training 1:
+adam(lr 1e-3): n_epoch= 1000
+BFGS:          n_epoch= 9000
+
+Losses: loss = 4.435e-03 | fit: 6.523e-02^2  PDE: 6.734e-04^2  BC: 1.162e-02^2   
+			|| fit: 5.485e-02^2  PDE: 4.878e-04^2  BC: 1.165e-02^2  
+
+
+commenti: 
+Rispetto all'esperimento immediatamente precedente: fit e BC sono uguali in train e loss; invece, PDE train è migliorato, mentre PDE test è nettamente migliorato, inoltre si è stabilizzato. Purtroppo, però il training mi ha impiegato quasi 2 ore. Adesso provo a vedere se la soluzione diventa molto instabile con 18 neuroni a strato, poi provo con 24.
+
+
+#####################################
+#TENTATIVO 02
+
+n_mu_train    = 6
+n_theta_train = 10
+
+train_split = 0.97
+
+rete:       dense(18) -> dense(18) -> dense(18)
+activation: tanh
+
+
+loss 1:
+normalization: si
+weights: fit 1 | PDE 100 | BC 1
+
+training 1:
+adam(lr 1e-3): n_epoch= 1000
+BFGS:          n_epoch= 9000
+
+Losses: loss = 5.477e-03 | fit: 6.661e-02^2  PDE: 3.000e-03^2  BC: 1.182e-02^2   
+			|| fit: 5.485e-02^2  PDE: 2.625e-01^2  BC: 1.181e-02^2  
+
+
+commenti: 
+Come sospettavo, non può performare bene la PDE test con una rete piccola, però ha impiegato solo mezz'ora. Adesso la conferma definitiva con 24 neuroni a strato.
+
+
+#####################################
+#TENTATIVO 03
+
+n_mu_train    = 6
+n_theta_train = 10
+
+train_split = 0.97
+
+rete:       dense(24) -> dense(24) -> dense(24)
+activation: tanh
+
+
+loss 1:
+normalization: si
+weights: fit 1 | PDE 100 | BC 1
+
+training 1:
+adam(lr 1e-3): n_epoch= 1000
+BFGS:          n_epoch= 9000
+
+Losses: loss = 4.594e-03 | fit: 6.641e-02^2  PDE: 6.709e-04^2  BC: 1.181e-02^2   
+			|| fit: 5.484e-02^2  PDE: 6.712e-04^2  BC: 1.182e-02^2  
+
+
+commenti: 
+Risultati paragonabili al caso con 22 neuroni a strato. Inoltre ha impiegato 2 ore e 10 minuti, veramente troppo.
