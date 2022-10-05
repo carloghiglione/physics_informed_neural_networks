@@ -1,0 +1,159 @@
+################################################
+#
+# TRAINING RESULTS POD_2
+# 
+################################################
+
+################################################
+### Experiment 01 (K_10)
+
+-> Dense(24) -> Dense(24) -> 
+
+K:           10
+train_split: 0.9
+
+keras (Adam, learning_rate=1e-3):  1000
+scipy (BFGS):                      5000
+
+| fit 1 | bc 1 |
+
+Losses: loss = 1.375e-09 | fit: 3.678e-05^2  bc: 4.669e-06^2   
+			|| fit: 6.393e-05^2  bc: 5.698e-06^2  
+
+
+Commenti:
+
+Le performances sono ottime, e i primi coefficienti sono abbastanza esplicativi. Abbiamo usato fit e BC loss, mentre PDE loss non l'abbiamo ancora usata. Come rete 1 abbiamo usato il migliore modello con 10 funzioni base (+ media)
+
+
+
+################################################
+### Experiment 02 (K_10)
+
+-> Dense(24) -> Dense(24) -> 
+
+K:           10
+train_split: 0.9
+
+keras (Adam, learning_rate=1e-3):  500
+scipy (BFGS):                     3000
+
+| fit 1 | bc 1 | PDE 1
+
+Losses: loss = 3.650e-02 | fit: 2.217e-04^2  bc: 1.397e-04^2  PDE: 1.911e-01^2   
+			|| fit: 2.484e-04^2  bc: 2.055e-04^2  PDE: 1.913e-01^2  
+
+
+Commenti:
+
+Abbiamo usato fit, BC e PDE loss. Come rete 1 abbiamo usato il migliore modello con 10 funzioni base (+ media). 5982.201761 s di training! Inoltre il training è peggiorato molto, e la soluzione ricostruita sembra essere grande il doppio della soluzione vera. Questo non accadeva nel primo caso. Non sappiamo se può essere dovuto a bug nel codice, o al fatto che questa loss proprio non va usata, in questo caso.
+
+
+
+################################################
+### Experiment 03 (K_10)
+
+-> Dense(24) -> Dense(24) -> 
+
+K:           10
+train_split: 0.9
+
+keras (Adam, learning_rate=1e-3):  1000
+scipy (BFGS):                     10000
+
+| fit 1 | bc 1 |
+
+Losses:  loss = 8.510e-10 | fit: 2.889e-05^2  bc: 4.070e-06^2   
+			 || fit: 4.928e-05^2  bc: 5.516e-06^2  
+
+
+Commenti:
+Un leggero miglioramento rispetto a prima, ma solo perché ho spinto di più il training.
+
+
+
+################################################
+### Experiment 04 (K_10)
+
+-> Dense(25) -> Dense(25) -> 
+
+K:           10
+train_split: 0.9
+
+keras (Adam, learning_rate=1e-3):  1000
+scipy (BFGS):                     10000
+
+| fit 1 | bc 1 |
+
+Losses:   loss = 7.931e-10 | fit: 2.797e-05^2  bc: 3.329e-06^2   
+			  || fit: 4.749e-05^2  bc: 3.388e-06^2  
+
+
+Commenti:
+Migliora un filo, ma nulla di rilevante rispetto al caso precedente.
+
+
+
+################################################
+### Experiment 05 (K_10)
+
+-> Dense(26) -> Dense(26) -> 
+
+K:           10
+train_split: 0.9
+
+keras (Adam, learning_rate=1e-3):  1000
+scipy (BFGS):                     10000
+
+| fit 1 | bc 1 |
+
+Losses:   loss = 9.364e-10 | fit: 3.037e-05^2  bc: 3.774e-06^2   
+			  || fit: 4.859e-05^2  bc: 4.972e-06^2  
+
+
+Commenti:
+Peggiora. In ogni caso, quindi, aumentare i neuroni non aiuta.
+
+
+
+################################################
+### Experiment 06 (K_5)
+
+-> Dense(24) -> Dense(24) -> 
+
+K:           5
+train_split: 0.9
+
+keras (Adam, learning_rate=1e-3):  1000
+scipy (BFGS):                     10000
+
+| fit 1 | bc 1 |
+
+Losses:  loss = 5.450e-10 | fit: 2.308e-05^2  bc: 3.541e-06^2   
+			 || fit: 4.294e-05^2  bc: 5.773e-06^2  
+
+
+Commenti:
+Adesso proviamo a vedere cosa succede usando 5 basi, in particolare di quanto peggiorano le performances. In realtà, rispetto al caso migliore (03) non c'è nessun peggioramento, e i risultati sono molto simili tra loro, incredibilmente.
+
+
+
+################################################
+### Experiment 07 (K_3)
+
+-> Dense(24) -> Dense(24) -> 
+
+K:           3
+train_split: 0.9
+
+keras (Adam, learning_rate=1e-3):  1000
+scipy (BFGS):                     10000
+
+| fit 1 | bc 1 |
+
+Losses:  loss = 5.960e-10 | fit: 2.431e-05^2  bc: 2.218e-06^2   
+			 || fit: 3.416e-05^2  bc: 1.799e-06^2  
+
+
+Commenti:
+Adesso proviamo a vedere cosa succede usando 3 basi, in particolare di quanto peggiorano le performances. Sembra migliorare ancora. Quindi poche basi migliorano le performances, perché il training sembra essere più facile.

@@ -1,0 +1,65 @@
+################################################
+#
+# TRAINING RESULTS POD_1
+# 
+################################################
+
+################################################
+### Experiment 01 (K_5)
+
+-> Dense(26) -> Dense(26) -> 
+
+K:           5
+train_split: 0.9
+
+keras (Adam, learning_rate=1e-3):   1000
+scipy (BFGS):                      40000
+
+| fit 1 | bc 1 |
+
+Losses: loss = 4.028e-07 | fit: 5.873e-04^2  bc: 2.405e-04^2   
+			|| fit: 8.548e-04^2  bc: 2.980e-04^2  
+
+
+Commenti:
+
+Ottime performances già così, e sembrerebbe poter ulteriormente migliorare con altro training
+
+################################################
+### Experiment 02 (K_10)
+
+-> Dense(26) -> Dense(26) -> 
+
+K:           10
+train_split: 0.9
+
+keras (Adam, learning_rate=1e-3):   1000
+scipy (BFGS):                      40000
+
+| fit 1 | bc 1 |
+
+Losses: loss = 1.447e-06 | fit: 1.089e-03^2  bc: 5.113e-04^2   
+			|| fit: 1.220e-03^2  bc: 5.594e-04^2  
+
+
+Commenti:
+Ho provato a raddoppiare il numero di basi, per provare ad avere la migliore approssimazione possibile
+
+################################################
+### Experiment 03 (K_3)
+
+-> Dense(26) -> Dense(26) -> 
+
+K:           3
+train_split: 0.9
+
+keras (Adam, learning_rate=1e-3):   1000
+scipy (BFGS):                      40000
+
+| fit 1 | bc 1 |
+
+Losses: (?)
+
+
+Commenti:
+Adesso provo ad ottenere 3 sole basi, facendomi guidare dal grafico degli autovalori cumulati. 
