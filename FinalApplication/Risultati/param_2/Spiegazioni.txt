@@ -1,0 +1,241 @@
+qui nel test metto sia i punti non usati nel training
+per ogni param, metto n_undersamplig/2 nuovi punti geometrici
+
+###########################################################
+### EXPM 01 ###
+
+rete: dense(20) -> dense(20)
+activation: tanh
+
+n_undersampling = 1000
+
+train_split = 0.80
+
+Training:
+adam: 500  (lr=1e-3)
+BFGS: 5000
+
+Losses: loss = 8.921e-04 | fit: 2.987e-02^2   || fit_1: 1.715e-01^2  fit_2: 8.137e-02^2  
+Total time: 263.568002 s
+
+commenti: arriva a 1e-1 e poi overfitta
+
+
+###########################################################
+### EXPM 02 ###
+
+rete: dense(20) -> dense(20) -> dense(20)
+activation: tanh
+
+n_undersampling = 1000
+
+train_split = 0.80
+
+Training:
+adam: 500  (lr=1e-3)
+BFGS: 5000
+
+Losses: loss = 5.503e-04 | fit: 2.346e-02^2   || fit_1: 9.072e-02^2  fit_2: 4.670e-02^2  
+Total time: 586.533930 s
+
+commenti: arriva a 1e-1 e poi overfitta, anche se meno di 01
+
+
+###########################################################
+### EXPM 03 ###
+
+rete: dense(20) -> dense(20) -> dense(20)
+activation: tanh
+
+n_undersampling = 1000
+
+train_split = 0.80
+
+Training:
+adam: 10000  (lr=1e-3)
+BFGS: 0
+
+Losses: loss = 1.988e-03 | fit: 4.459e-02^2   || fit_1: 5.725e-02^2  fit_2: 4.790e-02^2  
+Total time: 501.285243 s
+
+commenti: ho osservato che BFGS troppo presto fa overfittare, prolungare Adam aiuta molto
+scende un po' sotto 1e-1
+
+
+###########################################################
+### EXPM 04 ###
+
+rete: dense(20) -> dense(20) -> dense(20)
+activation: tanh
+
+n_undersampling = 1000
+
+train_split = 0.80
+
+Training:
+adam: 7500  (lr=1e-3)
+BFGS: 2500
+
+Losses: loss = 7.556e-04 | fit: 2.749e-02^2   || fit_1: 8.477e-02^2  fit_2: 4.568e-02^2  
+Total time: 353.979002 s
+
+commenti: BFGS fa overfittare e basta
+
+
+###########################################################
+### EXPM 05 ###
+
+rete: dense(30) -> dense(30) -> dense(30)
+activation: tanh
+
+n_undersampling = 1000
+
+train_split = 0.80
+
+Training:
+adam: 10000  (lr=1e-3)
+BFGS: 0
+
+Losses: loss = 1.765e-03 | fit: 4.201e-02^2   || fit_1: 5.816e-02^2  fit_2: 4.634e-02^2  
+Total time: 608.466117 s
+
+commenti: è analogo a 3, praticamente uguale
+
+
+###########################################################
+### EXPM 06 ###
+
+rete: dense(20) -> dense(20)
+activation: tanh
+
+n_undersampling = 1000
+
+train_split = 0.80
+
+Training:
+adam: 10000  (lr=1e-3)
+BFGS: 0
+
+Losses: loss = 2.129e-03 | fit: 4.614e-02^2   || fit_1: 5.592e-02^2  fit_2: 4.881e-02^2  
+Total time: 355.895298 s
+
+commenti: è analogo a 3
+
+
+###########################################################
+### EXPM 07 ###
+
+rete: dense(50) -> dense(50)
+activation: tanh
+
+n_undersampling = 1000
+
+train_split = 0.80
+
+Training:
+adam: 10000  (lr=1e-3)
+BFGS: 0
+
+Losses: loss = 1.814e-03 | fit: 4.259e-02^2   || fit_1: 5.796e-02^2  fit_2: 4.663e-02^2  
+Total time: 631.685940 s
+
+commenti: è analogo a 3 e a 6
+
+
+###########################################################
+### EXPM 08 ###
+
+rete: dense(20) -> dense(20)
+activation: tanh
+
+n_undersampling = 2000
+
+train_split = 0.80
+
+Training:
+adam: 10000  (lr=1e-3)
+BFGS: 0
+
+Losses: loss = 2.174e-03 | fit: 4.663e-02^2   || fit_1: 5.590e-02^2  fit_2: 4.881e-02^2  
+Total time: 634.312212 s
+
+commenti: col doppio dei punti assolutamente uguale a 6, solo lungo il doppio
+
+
+###########################################################
+### EXPM 09 ###
+
+rete: dense(20) -> dense(20)
+activation: tanh
+
+n_undersampling = 1000
+
+train_split = 0.80
+
+Training:
+adam: 10000 (lr=1e-2)
+BFGS: 0
+
+Losses: loss = 1.523e-03 | fit: 3.903e-02^2   || fit_1: 6.393e-02^2  fit_2: 4.577e-02^2  
+Total time: 354.750201 s
+
+commenti: alla 2500 al adam lr = 1e-2 non scende più in test
+
+
+###########################################################
+### EXPM 10 ###
+
+rete: dense(20) -> dense(20)
+activation: tanh
+
+n_undersampling = 1000
+
+train_split = 0.80
+
+Training:
+adam: 2500 (lr=1e-2)
+BFGS: 20000
+
+Losses: loss = 7.647e-04 | fit: 2.765e-02^2   || fit_1: 9.391e-01^2  fit_2: 4.204e-01^2 
+
+commenti: overfitta malissimo
+
+
+###########################################################
+### EXPM 11 ###
+
+rete: dense(20) -> dense(20)
+activation: tanh
+
+n_undersampling = 1000
+
+train_split = 0.80
+
+Training:
+adam: 2500 (lr=1e-2) 7500 (lr=1e-4)
+BFGS: 0
+
+Losses: loss = 1.715e-03 | fit: 4.142e-02^2   || fit_1: 6.409e-02^2  fit_2: 4.738e-02^2  
+Total time: 270.526840 s
+
+commenti: la fit_1 overfitta
+
+
+###########################################################
+### EXPM 12 ###
+
+rete: dense(50) -> dense(50)-> dense(50)
+activation: tanh
+
+n_undersampling = 1000
+
+train_split = 0.80
+
+Training:
+adam: 10000 (lr=1e-3)
+BFGS: 0
+
+Losses: loss = 1.839e-03 | fit: 4.288e-02^2   || fit_1: 6.112e-02^2  fit_2: 4.769e-02^2  
+
+commenti: come gli altri, overfitta un po'
+

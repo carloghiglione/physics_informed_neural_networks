@@ -1,0 +1,84 @@
+Qui ho usato nel test solo i punti di griglia dell'undersampling, 
+gli stessi del training
+
+
+###########################################################
+### EXPM 01 ###
+
+rete: dense(20) -> dense(20) -> dense(20)
+activation: tanh
+
+n_undersampling = 1000
+
+train_split = 0.80
+
+Training:
+adam: 500
+BFGS: 5000
+
+Losses: loss = 9.048e-07 | fit: 9.512e-04^2   || fit: 8.455e-03^2  
+Total time: 449.449969 s
+
+commenti: il training split è fatto male, riprovare. Arriva a 1e-2, 
+vedere con training split più basso
+
+###########################################################
+### EXPM 02 ###
+
+rete: dense(20) -> dense(20) -> dense(20)
+activation: tanh
+
+n_undersampling = 1000
+
+train_split = 0.80
+
+Training:
+adam: 500
+BFGS: 5000
+
+Losses: loss = 1.372e-06 | fit: 1.171e-03^2   || fit: 8.390e-03^2  
+Total time: 454.763008 s
+
+commenti: risultati belli, arriva a 1e-2
+
+
+###########################################################
+### EXPM 03 ###
+
+rete: dense(20) -> dense(20) -> dense(20)
+activation: tanh
+
+n_undersampling = 1000
+
+train_split = 0.50
+
+Training:
+adam: 500
+BFGS: 5000
+
+Losses: loss = 1.201e-06 | fit: 1.096e-03^2   || fit: 1.910e-02^2  
+Total time: 416.617489 s
+
+commenti: fa peggio, meglio tenere train split più alto
+
+
+###########################################################
+### EXPM 04 ###
+
+rete: dense(30) -> dense(30) -> dense(30)
+activation: tanh
+
+n_undersampling = 1000
+
+train_split = 0.80
+
+Training:
+adam: 500
+BFGS: 5000
+
+Losses: loss = 5.368e-07 | fit: 7.327e-04^2   || fit: 8.510e-03^2  
+Total time: 2314.224962 s
+
+commenti: arriva a 1e-2 e ci mette sei volte tanto
+
+

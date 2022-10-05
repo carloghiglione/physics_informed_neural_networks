@@ -1,0 +1,43 @@
+qui nel test metto sia i punti non usati nel training
+per ogni param, metto n_undersamplig/2 nuovi punti geometrici
+
+###########################################################
+### EXPM 01 ###
+
+rete: dense(20) -> dense(20)
+activation: tanh
+
+n_undersampling = 1000
+
+train_split = 0.80
+
+Training:
+adam: 10000 (lr=1e-3)
+BFGS: 0
+
+Losses: loss = 8.921e-04 | fit: 2.987e-02^2   || fit_1: 1.715e-01^2  fit_2: 8.137e-02^2  
+Total time: 263.568002 s
+
+commenti: arriva a 1e-2 e non overfitta
+
+
+###########################################################
+### EXPM 02 ###
+
+rete: dense(20) -> dense(20)
+activation: tanh
+
+n_undersampling = 1000
+
+train_split = 0.80
+
+Training:
+adam: 2500 (lr=1e-2)
+BFGS: 10000
+
+Losses: loss = 1.473e-05 | fit: 3.838e-03^2   || fit_1: 5.550e-03^2  fit_2: 5.467e-03^2  
+Total time: 558.649000 s
+
+commenti: molto bene, scende sotto 1e-2
+
+
